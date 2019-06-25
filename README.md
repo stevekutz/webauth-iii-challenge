@@ -1,5 +1,12 @@
 # Authentication using JSON Web Tokens (JWTs)
 
+# SETUP package.json using npm, run npm run npm server for dev environment 
+npm init 
+npm install nodemon --save-dev
+npm install connect-session-knex bcryptjs cors crypto-extra express helmet knex sqlite3 knex-cleaner jsonwebtoken
+npm dotenv
+
+
 ## Topics
 
 - Authentication.
