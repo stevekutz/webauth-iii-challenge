@@ -5,22 +5,18 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './dev.sqlite3'
-    }
+      filename: './data/JWTauth.db3'
+    },
+    useNullAsDefault: true,
+
+    migrations: {
+      directory: `./data/migrations` // backticks for fun
+    },
+
+    seeds: {
+      directory: './data/seeds'
+    },
   },
-  useNullAsDefault: true,
-
-  migrations: {
-    directory: `./data/migrations` // backticks for fun
-  },
-
-  seeds: {
-    directory: './data/seeds'
-  },
-
-
-
-
 
 
   staging: {
