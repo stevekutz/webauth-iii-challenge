@@ -4,43 +4,26 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');   // ADDED IN after installing dependency
 
 
-// REGISTER
+// REGISTER   ENDPOINT  /api
 // Creates the Account Login - we MUST hash the password, adds to user table
 //  username: groot      // add numbers to this to keep testing simple
 //  password: iamgroot   // add numbers to this to keep testing simple
-router.post('/register', (req,res) => {
+// REGISTER new user
+router.post('/register', (req, res) => {
     let user = req.body;
-
-    /*
-    // Make sure no blank info provided
-    if( !user.username || !user.password) {
-        return res.status(500).json({
-           message: "Provide a username and password"
-        })
-      }
-   
-     // We can add other kinds of password checks up here before proceeding such as
-     if(user.password.length < 8) {
-       return res.status(400).json({
-         message: `Password must be at least 8 chars`
-       });
-     }
-    */ 
-    // Main Code needed 
-    const hash =bcrypt.hashSync(user.password, 14); // 2^14
+    const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
     user.password = hash;
-
-
-     // Main Code needed
+  
     Auth.add(user)
-        .then(saved => {
-            res.status(201).json(saved);
-        })
-        .catch(err => {
-            res.status(500).json(err);
-        })
-
-})
+      .then(saved => {
+        const token = generateToken(saved);
+  
+        res.status(201).json(saved);
+      })
+      .catch(error => {
+        res.status(500).json(error);
+      });
+  });
 
 // LOGIN - we send back a JWT token
 router.post('/login', (req, res) => {
@@ -50,26 +33,15 @@ router.post('/login', (req, res) => {
       .first()
       .then(user => {
         if (user && bcrypt.compareSync(password, user.password)) {
-          // ADD out JWT token, exp & iat are autimatically added
-          jwt.sign({
-            userId: user.id,
-          }, 'super secret', (err, token) => {   // secret added here & callback
-            if(err) {
-              res.status(401).json({message: `Could not generate token`});
-            } else {
-              res.status(200).json({
-                message: `Welcome ${user.username}!`,
-                authToken: token,   // pass actual token back
-              });
-            }
-          })  
-          /*  MOVE THIS to inside jwt sign for successful login
+          const token = generateToken(user);
+  
           res.status(200).json({
             message: `Welcome ${user.username}!`,
+            authToken: token,   // pass actual token back
+            more: 'something',
           });
-          */
         } else {
-          res.status(401).json({ message: 'Invalid Credentials' });
+          res.status(401).json({ message: 'Invalid Credentials, YOU SHALL NOT PASS !!! (hacker) ' });
         }
       })
       .catch(error => {
@@ -77,6 +49,15 @@ router.post('/login', (req, res) => {
       });
   });
 
+// create helper function for generating JWT token, synchronously
+function generateToken (user) {
+    // ADD our JWT token, exp & iat are autimatically added
+    return jwt.sign({
+      userId: user.id,
+    }, 'super secret',   // secret
+      { expiresIn: '1h'},   // added expiration in 1 hour
+    )  
 
+}
 
 module.exports = router;
