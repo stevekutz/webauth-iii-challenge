@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const Auth = require('./auth-model');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');   // ADDED IN after installing dependency
+
 
 // REGISTER
 // Creates the Account Login - we MUST hash the password, adds to user table
@@ -40,7 +42,40 @@ router.post('/register', (req,res) => {
 
 })
 
-
+// LOGIN - we send back a JWT token
+router.post('/login', (req, res) => {
+    let { username, password } = req.body;
+  
+    Auth.findBy({ username })
+      .first()
+      .then(user => {
+        if (user && bcrypt.compareSync(password, user.password)) {
+          // ADD out JWT token, exp & iat are autimatically added
+          jwt.sign({
+            userId: user.id,
+          }, 'super secret', (err, token) => {   // secret added here & callback
+            if(err) {
+              res.status(401).json({message: `Could not generate token`});
+            } else {
+              res.status(200).json({
+                message: `Welcome ${user.username}!`,
+                authToken: token,   // pass actual token back
+              });
+            }
+          })  
+          /*  MOVE THIS to inside jwt sign for successful login
+          res.status(200).json({
+            message: `Welcome ${user.username}!`,
+          });
+          */
+        } else {
+          res.status(401).json({ message: 'Invalid Credentials' });
+        }
+      })
+      .catch(error => {
+        res.status(500).json(error);
+      });
+  });
 
 
 
