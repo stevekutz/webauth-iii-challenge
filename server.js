@@ -5,8 +5,8 @@ const cors = require('cors');
 
 // define routers
 const authRouter = require('./auth/auth-router');
-const restrictRouter = require('./restricted/restricted-router');
 const usersRouter = require('./users/users-router');
+const restrictRouter = require('./restricted/restricted-router');
 
 
 // define express app as server
@@ -17,6 +17,13 @@ server.use(express.json());
 server.use(helmet());
 server.use(cors());
 server.use(serverLogger);
+
+
+// define actual endpoints for router objects
+server.use('/api/register', authRouter);
+server.use('/api/users', usersRouter);  // changed route to include /api/
+server.use('/api/restricted', restrictRouter);
+
 
 // define custom Middleware
 function serverLogger(req, res, next) {
