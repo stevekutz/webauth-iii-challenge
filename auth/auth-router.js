@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 // Creates the Account Login - we MUST hash the password, adds to user table
 //  username: groot      // add numbers to this to keep testing simple
 //  password: iamgroot   // add numbers to this to keep testing simple
-router.post('/', (req,res) => {
+router.post('/register', (req,res) => {
     let user = req.body;
 
     /*

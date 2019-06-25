@@ -20,7 +20,7 @@ server.use(serverLogger);
 
 
 // define actual endpoints for router objects
-server.use('/api/register', authRouter);
+server.use('/api', authRouter);
 server.use('/api/users', usersRouter);  // changed route to include /api/
 server.use('/api/restricted', restrictRouter);
 
