@@ -45,8 +45,8 @@
   - users
     - users-model.js
     - users-router.js
-  myMiddleware
-    - myMiddleware (multiple exports modules accessed via chaining)
+  - myMiddleware
+    - myMW (multiple exports modules accessed via chaining)
     - restrictedMiddlware (as anonymous function)
 
 ## Topics
