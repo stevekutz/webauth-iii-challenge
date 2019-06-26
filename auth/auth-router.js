@@ -55,6 +55,7 @@ function generateToken (user) {
     // ADD our JWT token, exp & iat are autimatically added
     return jwt.sign({
       userId: user.id,
+      name: user.username,
       userRole: 'student',
  //   }, 'super secret',   // secret  CAN"T KEEP this is CODE, MUST move to .env
     }, secrets.jwt,

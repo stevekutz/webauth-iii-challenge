@@ -37,6 +37,7 @@ router.get('/', restricted2, (req, res) => {
 // }
 */
 
+// Change ther input to HOC to restrict access
 router.get('/', myMW.restrictedHOC('student'), (req, res) => {
     Users.find()
       .then(users => {
