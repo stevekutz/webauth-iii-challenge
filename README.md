@@ -1,4 +1,5 @@
 # Authentication using JSON Web Tokens (JWTs)
+## Backend
 
 ### SETUP package.json using npm
 - run `npm server` for dev environment
@@ -48,6 +49,16 @@
   - myMiddleware
     - myMW (multiple exports modules accessed via chaining)
     - restrictedMiddlware (as anonymous function)
+
+## Frontend
+#### SETUP React for installation
+- run `npm install --save-dev create-react-app`
+#### Create React application called `client`
+- run `npx creat-react-app client`
+#### Test client (should run on localhost:3000 in browser)
+- cd into `client`
+- run `npm start`
+
 
 ## Topics
 
