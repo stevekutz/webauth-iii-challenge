@@ -3,6 +3,7 @@ const Auth = require('./auth-model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');   // ADDED IN after installing dependency
 
+const secrets = require('../config/secrets'); // ADDED to hide secret
 
 // REGISTER   ENDPOINT  /api
 // Creates the Account Login - we MUST hash the password, adds to user table
@@ -54,7 +55,8 @@ function generateToken (user) {
     // ADD our JWT token, exp & iat are autimatically added
     return jwt.sign({
       userId: user.id,
-    }, 'super secret',   // secret
+ //   }, 'super secret',   // secret  CAN"T KEEP this is CODE, MUST move to .env
+    }, secrets.jwt,
       { expiresIn: '1h'},   // added expiration in 1 hour
     )  
 

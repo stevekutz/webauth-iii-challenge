@@ -1,3 +1,6 @@
+require('dotenv').config();  // For stashing secret
+
+
 const server = require('./server');
 
 const port = process.env.PORT = 5001;

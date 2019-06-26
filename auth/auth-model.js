@@ -4,7 +4,7 @@ module.exports = {
   add,      // used in auth-router
  // find,
   findBy,   // used in auth-router
-  findById, // used in auth-router
+   findById,
 };
 
 /*
