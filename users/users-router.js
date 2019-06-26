@@ -19,7 +19,7 @@ module.exports = router;
 
 // using anonymous function inside restrictedMiddleware
 const restricted2 = require('../myMiddleware/restrictedMiddleware')
-
+/*
 router.get('/', restricted2, (req, res) => {
     Users.find()
         .then(users => {
@@ -29,5 +29,21 @@ router.get('/', restricted2, (req, res) => {
 
 })
 
+
+// using PERMISSIONS - built from these creds
+// {
+// 	"username": "joeStudent",
+//	"password": "joeStudent"
+// }
+*/
+
+router.get('/', myMW.restrictedHOC('student'), (req, res) => {
+    Users.find()
+      .then(users => {
+        res.json(users);
+      })
+      .catch(err => res.send(err));
+  });
+  
 
 module.exports = router;
