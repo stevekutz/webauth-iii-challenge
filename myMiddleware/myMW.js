@@ -42,6 +42,8 @@ const restricted = (req, res, next) => {
 
 };
 
+
+// change role in auth-router generateTokenb helper function
 const restrictedHOC = (role) => {
   return(req, res, next) => {
     const token = req.headers.authorization;
@@ -71,10 +73,16 @@ const restrictedHOC = (role) => {
 
 }
 
-function routePrefixCheck (req, res, next) {
-  console.log('++++ baseURL is', req.baseUrl);
+const endpointPath = () => {
+  console.log('===> endpoint is ', req.url)
+}
 
-  if(req.baseUrl === '/api/users/HOC'){
+function routeHOCcheck (req, res, next) {
+  console.log('++++ baseURL is', req.baseUrl);
+  let url = req.url;
+  console.log('url is', url);
+
+  if(req.url === '/HOC'){
       console.log('%%% resticted route !!!!!\n');
       next();
   } else {
@@ -90,6 +98,7 @@ module.exports = {
   myLogger2,
   restricted,
   restrictedHOC,
-  routePrefixCheck
+  routeHOCcheck,
+  endpointPath,
 }
 
