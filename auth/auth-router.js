@@ -57,7 +57,7 @@ function generateToken (user) {
       userId: user.id,
       name: user.username,
       userRole: 'student',
- //   }, 'super secret',   // secret  CAN"T KEEP this is CODE, MUST move to .env
+ //   }, 'super secret',   // secret  CAN"T KEEP this in CODE, MUST move to .env
     }, secrets.jwt,
       { expiresIn: '1h'},   // added expiration in 1 hour
     )  
