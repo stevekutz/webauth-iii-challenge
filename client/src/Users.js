@@ -1,4 +1,4 @@
-import React from 'react ';
+import React from 'react';
 import { Fragment } from 'react';
 
 class Users extends React.Component {

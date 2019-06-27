@@ -1,7 +1,7 @@
-import React from 'react ';
+import React from 'react';
 import { Fragment } from 'react';
 
-class Signup extends React.Component {
+class SignUp extends React.Component {
     render() {
         return (
             <Fragment>
@@ -14,4 +14,4 @@ class Signup extends React.Component {
 
 }
 
-export default Signup;
+export default SignUp;
