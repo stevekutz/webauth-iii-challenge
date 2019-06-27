@@ -68,7 +68,7 @@ class SignIn extends React.Component {
           .then(res => {
               console.log("res data >>> \n", res.data);
             // store the token to local storage
-            localStorage.setItem('jwt', res.data.token);
+            localStorage.setItem('jwt', res.data.authToken);
           })
           .catch(error => console.error(error.response));
       };
