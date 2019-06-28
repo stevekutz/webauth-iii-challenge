@@ -59,28 +59,38 @@ class SignIn extends React.Component {
     
     handleSubmit = async event => {
         event.preventDefault();
+
+        const {username, password } = this.state;
+
+      if(username && password) {
+
         console.log(" Logged IN NOW !!!");
         console.log(this.state);
-
         try{
-            const {username, password } = this.state;
-    
-            // after putting in helper  we can replace this
-                //  const endpoint = "http://localhost:5000/api/auth/login"
-                // const result = await axios.post(endpoint, {
-                    const result = await api.post('/login', {
-                username,
-                password,
-            })
-            
-             console.log(result);
-            // Now for the good part !!!
-            localStorage.setItem('jwt',  result.data.authToken);
+          // after putting in helper  we can replace this
+              //  const endpoint = "http://localhost:5000/api/auth/login"
+              // const result = await axios.post(endpoint, {
+                  const result = await api.post('/login', {
+              username,
+              password,
+          })           
+           console.log(result);
+          // Now for the good part !!!
+          localStorage.setItem('jwt',  result.data.authToken);
 
+         }  catch (err) {
+             console.log(err);
+         }
+      } else {
+        console.log("blank creds attempt at LOGIN")
+        this.setState({
+          username: '',
+          password: '',
+        })
 
-           }  catch (err) {
-               console.log(err);
-           }
+        return <h1>  Enter ALL Login CREDS !!</h1>
+      }
+
 
     };   
 

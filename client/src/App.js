@@ -15,6 +15,9 @@ import Users from './Users';
 class App extends React.Component {
 
   logout = () => {
+
+    console.log(" Now Logged OUT");
+    
     localStorage.removeItem('jwt')
     this.props.history.push('/login')
   }

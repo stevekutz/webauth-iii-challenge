@@ -7,7 +7,7 @@ import withAuth from './helpers/auth';
 
 class Users extends React.Component {
     state = {
-        users: [],
+        users: [],   // NEVER FORGET to initialize state !!!!!
     }
     async componentDidMount() {
         try {
