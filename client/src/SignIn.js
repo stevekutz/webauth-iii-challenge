@@ -39,7 +39,7 @@ class SignIn extends React.Component {
                 </div>
       
                 <div>
-                  <button type="submit">Login</button>
+                  <button type="submit"> Sign In - LOGIN !!! </button>
                 </div>
               </form>
 
@@ -73,7 +73,10 @@ class SignIn extends React.Component {
                 password,
             })
             
-            console.log(result);
+             console.log(result);
+            // Now for the good part !!!
+            localStorage.setItem('jwt',  result.data.authToken);
+
 
            }  catch (err) {
                console.log(err);

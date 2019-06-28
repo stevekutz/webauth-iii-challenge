@@ -8,29 +8,26 @@ class Signup extends React.Component {
         fullname: '',
         username: '',
         password: '',
+        department: '',
       };
 
       handleChange = event => {
-        console.log('handlingChange >> ', event.target.value);
-/*
+/*   TK way
         this.setState({
             [event.target.name]: event.target.value,
         })
-*/
-        
+*/      
         const { name, value } = event.target;
         this.setState({ [name]: value });
-        
-    
     };
     
     handleSubmit = async event => {
         event.preventDefault();
-        console.log("submittedSignUp");
+        console.log("submitted SignUp");
         console.log(this.state);
 
        try{
-        const {fullname, username, password } = this.state;
+        const {fullname, username, password, department } = this.state;
 
         //const endpoint = "http://localhost:5000/api/auth/register"
         //const result = await axios.post(endpoint, {
@@ -38,15 +35,19 @@ class Signup extends React.Component {
             fullname,
             username,
             password,
+            department,
         })
 
-        console.log(result);
+        console.log(">> This is result >> ", result);
+        console.log(">> This is result.data >> ", result.data);
+
+        // NOW we can see localStorage doing something fun!
+        localStorage.setItem('jwt',  result.data.authToken);
+
 
        }  catch (err) {
            console.log(err);
        }
-
-
     };  
 
 
@@ -78,17 +79,18 @@ class Signup extends React.Component {
                         onChange = {this.handleChange}
                         value = {this.state.password}
                     />
-                    <button type="submit">Login</button>
+                    <input 
+                        type = "text"
+                        name = "department"
+                        placeholder = "Department"
+                        onChange = {this.handleChange}
+                        value = {this.state.department}
+                    />
+                    <button type="submit"> Sign UP - register  !!!</button>
                 </form>
-
-
-
             </Fragment>
-
-
         )
     }
-
 }
 
 export default Signup;

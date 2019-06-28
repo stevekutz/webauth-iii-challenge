@@ -11,7 +11,7 @@ import Users from './Users';
 function App() {
   return (
     <>
-      <h2> Something here !YES erere</h2>
+      <h2> Authentication with JWT-iv >> FullStack !</h2>
 
       <ul>
         <li><NavLink to = "/signup">Signup</NavLink></li>
