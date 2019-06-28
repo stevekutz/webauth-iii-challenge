@@ -1,6 +1,7 @@
 import React from 'react';
 import { Fragment } from 'react';
-import axios from 'axios';
+// import axios from 'axios';    // from TK
+import api from './helpers/api';
 
 class SignIn extends React.Component {
     state = {
@@ -56,6 +57,33 @@ class SignIn extends React.Component {
         this.setState({ [name]: value });
       };
     
+    handleSubmit = async event => {
+        event.preventDefault();
+        console.log(" Logged IN NOW !!!");
+        console.log(this.state);
+
+        try{
+            const {username, password } = this.state;
+    
+            // after putting in helper  we can replace this
+                //  const endpoint = "http://localhost:5000/api/auth/login"
+                // const result = await axios.post(endpoint, {
+                    const result = await api.post('/login', {
+                username,
+                password,
+            })
+            
+            console.log(result);
+
+           }  catch (err) {
+               console.log(err);
+           }
+
+    };   
+
+
+
+      /* from TK
       handleSubmit = event => {
         event.preventDefault();
         console.log("submitted");
@@ -72,7 +100,7 @@ class SignIn extends React.Component {
           })
           .catch(error => console.error(error.response));
       };
-
+      */
 
 
 }
