@@ -39,8 +39,9 @@ router.get('/', restricted2, (req, res) => {
 
 // Change ther input to HOC to restrict access
 //     adding myMW.routeHOCcheck will give Resticted route message & NO users!
-router.get('/', myMW.restrictedHOC('student'), (req, res) => {
-    Users.find()
+// router.get('/', myMW.restrictedHOC('student'), (req, res) => {
+router.get('/',  (req, res) => {
+Users.find()
       .then(users => {
         res.json(users);
       })
